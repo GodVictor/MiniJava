@@ -1,4 +1,4 @@
 .idea/
 out/
 analisador-lexico.iml
-br.com.unifil.analisadorLexico.modelo.Teste.java
+analisador-lexico/codigos/src/br/com/unifil/analisadorLexico/Teste/*.java
