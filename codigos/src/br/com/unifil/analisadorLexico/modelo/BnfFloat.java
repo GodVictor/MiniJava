@@ -1,11 +1,11 @@
 
-package view;
+package br.com.unifil.analisadorLexico.modelo;
 
-public class BnfDouble {
+public class BnfFloat {
     String s[] ;
-    String bnfDouble = "";
+    String bnfFloat = "";
     
-    public BnfDouble(String bnf){
+    public BnfFloat(String bnf){
         s = bnf.split(";");
         bnf = "";
         for(int i = 0;i < s.length;i++ ){
@@ -17,22 +17,22 @@ public class BnfDouble {
     public String converter(){
         for(int i = 0;i < s.length;i++ ){
             if(s[i].equals("+") || s[i].equals("-") || s[i].equals("*") || s[i].equals("/") ){
-                bnfDouble += "<assignment operator> ";
+                bnfFloat += "<assignment operator> ";
             }else if(s[i].equals("=")){
-                bnfDouble += "::= ";
+                bnfFloat += "::= ";
             }else if(s[i].equals("public")  || s[i].equals("private")  || s[i].equals("default")  || s[i].equals("protected") ){
-                bnfDouble += "<method modifier> ";
-            }else if(s[i].equals("double")){
-                bnfDouble += "<floating-point type> ";
+                bnfFloat += "<method modifier> ";
+            }else if(s[i].equals("float")){
+                bnfFloat += "<floating-point type> ";
             }else if(s[i].matches("^[0-9]*$")){
-                bnfDouble += "<numeric> ";
-            }else if(s[i].matches("\\d+((\\.\\d+)?(f|F)?)?")){
-                bnfDouble += "<numeric>";
+                bnfFloat += "<numeric> ";
+            }else if(s[i].matches("\\d+((\\.\\d+)?(f|F))?")){
+                bnfFloat += "<numericf> ";
             }else{
-                bnfDouble += "<variable name> ";
+                bnfFloat += "<variable name> ";
             }
         }
-        return bnfDouble;
+        return bnfFloat;
     }
     
 }

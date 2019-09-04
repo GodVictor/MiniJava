@@ -1,4 +1,4 @@
-package view;
+package br.com.unifil.analisadorLexico.modelo;
 
 public class Bnfboolean
 {

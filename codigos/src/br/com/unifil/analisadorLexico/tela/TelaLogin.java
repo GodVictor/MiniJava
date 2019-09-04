@@ -1,7 +1,7 @@
 
-package view;
+package br.com.unifil.analisadorLexico.tela;
 
-public class BnfFloat {
+class BnfFloat {
     String s[] ;
     String bnfFloat = "";
     
