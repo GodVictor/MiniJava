@@ -31,14 +31,14 @@ public class AnalisadorLexico {
         for (int i = 0; i < tamanho; i++) {
             token = false;
 
-            if (token && metodoPrincipal) {
-                verificador(sinais, separador[i], "<SINAIS, %s>");
+            if (metodoPrincipal) {
+                verificador(sinais, separador[i], "<SINAIS, '%s'>");
             } else if (!metodoPrincipal) {
-                verificador(palavrasReservadas, separador[i], "<PR, %s>");
-                verificador(sinais, separador[i], "<SINAIS, %s>");
+                verificador(palavrasReservadas, separador[i], "<PR, '%s'>");
+                verificador(sinais, separador[i], "<SINAIS, '%s'>");
 
                 if (!token && !separador[i].equals(" ")) {
-                    resultado.add(String.format("<ID, %s>", separador[i]));
+                    resultado.add(String.format("<ID, '%s'>", separador[i]));
                 }
             }
         }

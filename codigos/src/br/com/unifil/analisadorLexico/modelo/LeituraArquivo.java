@@ -14,8 +14,9 @@ public class LeituraArquivo {
         AnalisadorLexico analisador = new AnalisadorLexico();
 
         try {
-            System.out.println("Digite o caminho dos diretórios do arquivo .txt: ");
-            String arquivo = teclado.nextLine();
+//            System.out.println("Digite o caminho dos diretórios do arquivo .txt: ");
+//            String arquivo = teclado.nextLine();
+            String arquivo = "/Users/leonardomorita/Documents/entrada1.txt";
             entrada = new Scanner(new BufferedReader(new FileReader(arquivo)));
 
             System.out.println();
