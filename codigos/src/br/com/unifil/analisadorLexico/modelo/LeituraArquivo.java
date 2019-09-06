@@ -11,7 +11,6 @@ public class LeituraArquivo {
     public static void main(String[] args) {
         Scanner entrada;
         Scanner teclado = new Scanner(System.in);
-
         AnalisadorLexico analisador = new AnalisadorLexico();
 
         try {

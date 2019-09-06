@@ -36,7 +36,7 @@ public class AnalisadorLexico {
             separador = entrada.split(" ");
             tamanho = separador.length;
         } else {
-            separador = separador[1].split(" ");
+            separador = separador[1].trim().split(" ");
             tamanho = separador.length;
         }
 
@@ -70,8 +70,6 @@ public class AnalisadorLexico {
     public void limparLista() { resultado.clear(); }
 
     private void verificador(List<String> lista, String textoSeparado, String lexema) {
-        if (textoSeparado.equals("")) return;
-
         for (int j = 0; j < lista.size(); j++) {
             if (textoSeparado.equals(lista.get(j))) {
                 resultado.add(String.format(lexema, textoSeparado));
