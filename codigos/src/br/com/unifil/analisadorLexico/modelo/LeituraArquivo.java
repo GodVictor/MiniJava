@@ -3,6 +3,7 @@ package br.com.unifil.analisadorLexico.modelo;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.List;
 import java.util.Scanner;
 
 public class LeituraArquivo {
@@ -22,11 +23,13 @@ public class LeituraArquivo {
 
             int linha = 1;
             while (entrada.hasNextLine()) {
-                analisador.converterEmFluxoDeTokens(entrada.nextLine().trim(), linha);
+                List<String> strings = analisador.converterEmFluxoDeTokens(entrada.nextLine().trim(), linha);
+                System.out.println(linha + "- " + strings);
+                analisador.limparLista();
                 linha++;
             }
 
-            System.out.println(analisador.getResultado());
+//            System.out.println(analisador.getResultado());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

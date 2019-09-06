@@ -5,20 +5,21 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AnalisadorLexico {
-    List<String> palavrasReservadas = Arrays.asList("public", "class");
+    List<String> palavrasReservadas = Arrays.asList("public", "class", "int[]", "boolean", "int", "if", "else",
+            "while");
     List<String> sinais = Arrays.asList("{", "}");
     List<String> resultado = new ArrayList<>();
     boolean token = false;
     boolean metodoPrincipal = false;
     boolean classe = false;
 
-    public void converterEmFluxoDeTokens(String entrada, int linha) {
-        System.out.format("%d- %s%n", linha, entrada);
+    public List<String> converterEmFluxoDeTokens(String entrada, int linha) {
+//        System.out.format("%d- %s%n", linha, entrada);
 
         final String PRINCIPAL = "public static void main(String[] args)";
         final String CLASSE = "public class";
         String separador[] = entrada.split("");
-        int tamanho = 0;
+        int tamanho;
 
         if (entrada.contains(PRINCIPAL)) {
             resultado.add(String.format("<MainClass, '%s'>", PRINCIPAL));
@@ -62,9 +63,15 @@ public class AnalisadorLexico {
 
         metodoPrincipal = false;
         classe = false;
+
+        return resultado;
     }
 
+    public void limparLista() { resultado.clear(); }
+
     private void verificador(List<String> lista, String textoSeparado, String lexema) {
+        if (textoSeparado.equals("")) return;
+
         for (int j = 0; j < lista.size(); j++) {
             if (textoSeparado.equals(lista.get(j))) {
                 resultado.add(String.format(lexema, textoSeparado));
