@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AnalisadorLexico {
-    List<String> palavrasReservadas = Arrays.asList("public", "class", "int[]", "boolean", "int", "if", "else",
-            "while");
+    List<String> palavrasReservadas = Arrays.asList("public", "class");
+    List<String> type = Arrays.asList("int[]", "boolean", "int");
     List<String> sinais = Arrays.asList("{", "}");
     List<String> resultado = new ArrayList<>();
     boolean token = false;
@@ -21,15 +21,12 @@ public class AnalisadorLexico {
         String separador[] = entrada.split("");
         int tamanho;
 
-        if (entrada.contains(PRINCIPAL)) {
-            resultado.add(String.format("<MainClass, '%s'>", PRINCIPAL));
-            metodoPrincipal = true;
-        }
+        verificadorMetodoMain(entrada, PRINCIPAL);
 
-        if (entrada.contains(CLASSE)) {
-            resultado.add(String.format("<ClassDeclaration, '%s'>", CLASSE));
-            classe = true;
-            separador = entrada.split("class");
+        separador = verificadorClasse(entrada, CLASSE, separador);
+
+        if (entrada.matches("'System.out.println'")) {
+            System.out.println("FOI ENCONTRADO-----------------");
         }
 
         if (!classe) {
@@ -54,9 +51,24 @@ public class AnalisadorLexico {
             } else {
                 verificador(palavrasReservadas, separador[i], "<PR, '%s'>");
                 verificador(sinais, separador[i], "<SINAIS, '%s'>");
+                verificador(type, separador[i], "<Type, '%s'>");
 
                 if (!token && !separador[i].equals(" ")) {
-                    resultado.add(String.format("<ID, '%s'>", separador[i]));
+
+                    if (separador[i].contains(";")) {
+                        String s = separador[i].split(";")[0];
+                        resultado.add(String.format("<ID, '%s'>", s));
+                    } else {
+                        resultado.add(String.format("<ID, '%s'>", separador[i]));
+                    }
+
+                }
+
+                if (separador[i].contains(";")) {
+                    System.out.println("------------>>>>>>>>" + separador[i]);
+                    separador[i] = separador[i].split(";")[0];
+                    System.out.println(separador[i]);
+                    resultado.add("<SIMBOLO, ';'>");
                 }
             }
         }
@@ -65,6 +77,22 @@ public class AnalisadorLexico {
         classe = false;
 
         return resultado;
+    }
+
+    private String[] verificadorClasse(String entrada, String CLASSE, String[] separador) {
+        if (entrada.contains(CLASSE)) {
+            resultado.add(String.format("<ClassDeclaration, '%s'>", CLASSE));
+            classe = true;
+            separador = entrada.split("class");
+        }
+        return separador;
+    }
+
+    private void verificadorMetodoMain(String entrada, String PRINCIPAL) {
+        if (entrada.contains(PRINCIPAL)) {
+            resultado.add(String.format("<MainClass, '%s'>", PRINCIPAL));
+            metodoPrincipal = true;
+        }
     }
 
     public void limparLista() { resultado.clear(); }
