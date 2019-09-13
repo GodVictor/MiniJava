@@ -23,7 +23,16 @@ public class LeituraArquivo {
             int linha = 1;
             while (entrada.hasNextLine()) {
                 List<String> strings = analisador.converterEmFluxoDeTokens(entrada.nextLine().trim(), linha);
-                System.out.println(linha + "- " + strings);
+
+                for (int i = 0; i < strings.size(); i++) {
+                    if (i == 0) {
+                        System.out.print(linha + " - " + strings.get(i) + ", ");
+                    }
+                    System.out.print(strings.get(i) + ", ");
+                    if (i == strings.size()-1) {
+                        System.out.println(strings.get(i));
+                    }
+                }
                 analisador.limparLista();
                 linha++;
             }
