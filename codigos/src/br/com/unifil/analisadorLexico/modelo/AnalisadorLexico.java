@@ -25,7 +25,7 @@ public class AnalisadorLexico {
 
         separador = verificadorClasse(entrada, CLASSE, separador);
 
-        if (entrada.matches("'System.out.println'")) {
+        if (entrada.matches("System\\.out\\.println\\(([^;].*\\)*);")) {
             System.out.println("FOI ENCONTRADO-----------------");
         }
 
