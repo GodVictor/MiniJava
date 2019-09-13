@@ -12,6 +12,7 @@ public class AnalisadorLexico {
     boolean token = false;
     boolean metodoPrincipal = false;
     boolean classe = false;
+    boolean imprimir = false;
 
     public List<String> converterEmFluxoDeTokens(String entrada, int linha) {
 //        System.out.format("%d- %s%n", linha, entrada);
@@ -26,7 +27,9 @@ public class AnalisadorLexico {
         separador = verificadorClasse(entrada, CLASSE, separador);
 
         if (entrada.matches("System\\.out\\.println\\(([^;].*\\)*);")) {
-            System.out.println("FOI ENCONTRADO-----------------");
+//            System.out.println("FOI ENCONTRADO-----------------");
+            resultado.add(String.format("<Statment, '%s'>", entrada.split(";")[0]));
+            imprimir = true;
         }
 
         if (!classe) {
@@ -48,6 +51,8 @@ public class AnalisadorLexico {
                 if (!token && !separador[i].equals(" ")) {
                     resultado.add(String.format("<ID, '%s'>", separador[i]));
                 }
+            } else if (imprimir) {
+                verificarPontoEVirgula(separador, i);
             } else {
                 verificador(palavrasReservadas, separador[i], "<PR, '%s'>");
                 verificador(sinais, separador[i], "<SINAIS, '%s'>");
@@ -64,19 +69,24 @@ public class AnalisadorLexico {
 
                 }
 
-                if (separador[i].contains(";")) {
-                    System.out.println("------------>>>>>>>>" + separador[i]);
-                    separador[i] = separador[i].split(";")[0];
-                    System.out.println(separador[i]);
-                    resultado.add("<SIMBOLO, ';'>");
-                }
+                verificarPontoEVirgula(separador, i);
             }
         }
 
         metodoPrincipal = false;
         classe = false;
+        imprimir = false;
 
         return resultado;
+    }
+
+    private void verificarPontoEVirgula(String[] separador, int i) {
+        if (separador[i].contains(";")) {
+//                    System.out.println("------------>>>>>>>>" + separador[i]);
+            separador[i] = separador[i].split(";")[0];
+            System.out.println(separador[i]);
+            resultado.add("<SIMBOLO, ';'>");
+        }
     }
 
     private String[] verificadorClasse(String entrada, String CLASSE, String[] separador) {
