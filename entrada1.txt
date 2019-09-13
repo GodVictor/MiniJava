@@ -1,0 +1,9 @@
+public class Principal {
+    public static void main(String[] args) {
+        int a = 0;
+        int[] b;
+        Aluno aluno;
+        System.out.println("Olá, Mundo!");
+        System.out.println(a);
+    }
+}
