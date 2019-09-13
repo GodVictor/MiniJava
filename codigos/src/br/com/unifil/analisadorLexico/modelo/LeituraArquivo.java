@@ -26,7 +26,7 @@ public class LeituraArquivo {
 
                 for (int i = 0; i < strings.size(); i++) {
                     if (i == 0) {
-                        System.out.print(linha + " - " + strings.get(i) + ", ");
+                        System.out.print(linha + "- " + strings.get(i) + ", ");
                     }
                     System.out.print(strings.get(i) + ", ");
                     if (i == strings.size()-1) {
