@@ -37,6 +37,7 @@ public class AnalisadorLexico {
         String verificadorDeDeclaracaoVariavel = "[A-Z]([a-z]+[0-9]*)+\\s([a-z]+[0-9]*)+\\s*?;";
         if (entrada.matches(verificadorDeDeclaracaoVariavel)) {
             resultado.add(String.format("<VarDeclaration, '%s'>", entrada.split(";")[0]));
+
             variavel = true;
         }
 
@@ -60,6 +61,17 @@ public class AnalisadorLexico {
                     resultado.add(String.format("<ID, '%s'>", separador[i]));
                 }
             } else if (imprimir || variavel) {
+                if (variavel) {
+                    if (separador[i].matches("^[A-Z]+([a-z]+[A-Z]*[0-9]*)+$")) {
+                        resultado.add(String.format("<Type, '%s'>", separador[i]));
+                    } else {
+                        verificador(type, separador[i], "<Type, '%s'>");
+                    }
+
+                    if (separador[i].matches("^([a-z]+[A-Z]*[0-9]*)+;?$")) {
+                        resultado.add(String.format("<ID, '%s'>", separador[i].split(";")[0]));
+                    }
+                }
                 verificarPontoEVirgula(separador, i);
             } else {
                 verificador(palavrasReservadas, separador[i], "<PR, '%s'>");
@@ -84,6 +96,7 @@ public class AnalisadorLexico {
         metodoPrincipal = false;
         classe = false;
         imprimir = false;
+        variavel = false;
 
         return resultado;
     }
@@ -92,7 +105,7 @@ public class AnalisadorLexico {
         if (separador[i].contains(";")) {
 //                    System.out.println("------------>>>>>>>>" + separador[i]);
             separador[i] = separador[i].split(";")[0];
-            System.out.println(separador[i]);
+//            System.out.println(separador[i]);
             resultado.add("<SIMBOLO, ';'>");
         }
     }
