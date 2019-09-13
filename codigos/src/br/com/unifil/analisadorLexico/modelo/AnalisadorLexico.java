@@ -5,14 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AnalisadorLexico {
-    List<String> palavrasReservadas = Arrays.asList("public", "class");
-    List<String> type = Arrays.asList("int[]", "boolean", "int");
-    List<String> sinais = Arrays.asList("{", "}");
-    List<String> resultado = new ArrayList<>();
-    boolean token = false;
-    boolean metodoPrincipal = false;
-    boolean classe = false;
-    boolean imprimir = false;
+    private List<String> palavrasReservadas = Arrays.asList("public", "class");
+    private List<String> type = Arrays.asList("int[]", "boolean", "int");
+    private List<String> sinais = Arrays.asList("{", "}");
+    private List<String> resultado = new ArrayList<>();
+    private boolean token = false;
+    private boolean metodoPrincipal = false;
+    private boolean classe = false;
+    private boolean imprimir = false;
+    private boolean variavel = false;
+
 
     public List<String> converterEmFluxoDeTokens(String entrada, int linha) {
 //        System.out.format("%d- %s%n", linha, entrada);
@@ -30,6 +32,12 @@ public class AnalisadorLexico {
 //            System.out.println("FOI ENCONTRADO-----------------");
             resultado.add(String.format("<Statment, '%s'>", entrada.split(";")[0]));
             imprimir = true;
+        }
+
+        String verificadorDeDeclaracaoVariavel = "[A-Z]([a-z]+[0-9]*)+\\s([a-z]+[0-9]*)+\\s*?;";
+        if (entrada.matches(verificadorDeDeclaracaoVariavel)) {
+            resultado.add(String.format("<VarDeclaration, '%s'>", entrada.split(";")[0]));
+            variavel = true;
         }
 
         if (!classe) {
@@ -51,7 +59,7 @@ public class AnalisadorLexico {
                 if (!token && !separador[i].equals(" ")) {
                     resultado.add(String.format("<ID, '%s'>", separador[i]));
                 }
-            } else if (imprimir) {
+            } else if (imprimir || variavel) {
                 verificarPontoEVirgula(separador, i);
             } else {
                 verificador(palavrasReservadas, separador[i], "<PR, '%s'>");
