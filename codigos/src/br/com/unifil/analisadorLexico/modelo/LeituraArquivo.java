@@ -24,13 +24,20 @@ public class LeituraArquivo {
             while (entrada.hasNextLine()) {
                 List<String> strings = analisador.converterEmFluxoDeTokens(entrada.nextLine().trim(), linha);
 
-                for (int i = 0; i < strings.size(); i++) {
-                    if (i == 0) {
-                        System.out.print(linha + "- " + strings.get(i) + ", ");
-                    }
-                    System.out.print(strings.get(i) + ", ");
+
+
+                if (strings.size() == 1) {
+                    System.out.print(linha + "- " + strings.get(0));
+                    System.out.println();
+                } else {
+                    System.out.print(linha + "- " + strings.get(0) + ", ");
+                }
+
+                for (int i = 1; i < strings.size(); i++) {
                     if (i == strings.size()-1) {
                         System.out.println(strings.get(i));
+                    } else {
+                        System.out.print(strings.get(i) + ", ");
                     }
                 }
                 analisador.limparLista();
