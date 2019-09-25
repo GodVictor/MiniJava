@@ -1,45 +1,36 @@
 package br.com.unifil.analisadorLexico.Teste;
 
-// /Users/leonardomorita/Documents/entrada1.txt
+import br.com.unifil.analisadorLexico.modelo.AnalisadorLexico2;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.List;
+import java.util.Scanner;
+
 public class Teste {
 
     public static void main(String[] args) {
-        String a = "public class TesteTes {";
-        String b = "public";
-        String c = "int a = 0;";
-        String[] strings = b.split("");
-
-        strings = a.split("class");
-
-        if (c.contains(";")) {
-            int indiceSimbolo = c.indexOf(";");
-            System.out.println(indiceSimbolo);
-            String aux = c.substring(0, indiceSimbolo);
-            String regex = aux.substring(indiceSimbolo-1);
-
-            String[] split = c.split(regex);
-            for (int i = 0; i < split.length; i++) {
-                System.out.println(split[i]);
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Caminho do diretório do arquivo: ");
+        String caminho = teclado.nextLine();
+        int linha = 1;
+        try {
+            Scanner entrada = new Scanner(new BufferedReader(new FileReader(caminho)));
+            while (entrada.hasNextLine()) {
+                AnalisadorLexico2 analisadorLexico = new AnalisadorLexico2();
+                List<String> strings = analisadorLexico.converterEmFluxoDeTokens(entrada.nextLine().trim());
+                System.out.print(linha + "- ");
+                for (int i = 0; i < strings.size(); i++) {
+                    System.out.print(strings.get(i));
+                }
+                linha++;
+                System.out.println();
             }
-
-
-//            System.out.println("original " + c);
-//            System.out.println(aux);
-//            System.out.println(regex);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
 
-//        String[] split = c.split("");
-
-//        for (int i = 0; i < split.length; i++) {
-//            System.out.println(split[i]);
-//        }
-
-//        for (int i = 0; i < strings.length; i++) {
-//            System.out.println(strings[i]);
-//        }
-//
-//        System.out.println();
-//        System.out.println(strings[1]);
     }
 
 }

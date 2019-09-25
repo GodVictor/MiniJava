@@ -24,8 +24,6 @@ public class LeituraArquivo {
             while (entrada.hasNextLine()) {
                 List<String> strings = analisador.converterEmFluxoDeTokens(entrada.nextLine().trim(), linha);
 
-
-
                 if (strings.size() == 1) {
                     System.out.print(linha + "- " + strings.get(0));
                     System.out.println();
@@ -40,6 +38,7 @@ public class LeituraArquivo {
                         System.out.print(strings.get(i) + ", ");
                     }
                 }
+
                 analisador.limparLista();
                 linha++;
             }

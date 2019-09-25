@@ -14,6 +14,7 @@ public class AnalisadorLexico {
     private boolean classe = false;
     private boolean imprimir = false;
     private boolean variavel = false;
+    private boolean metodo = false;
 
 
     public List<String> converterEmFluxoDeTokens(String entrada, int linha) {
@@ -39,6 +40,11 @@ public class AnalisadorLexico {
             resultado.add(String.format("<VarDeclaration, '%s'>", entrada.split(";")[0]));
 
             variavel = true;
+        }
+
+        if (entrada.matches("^public\\s([a-z]|[A-Z][a-z])([a-z]*[A-Z]*)*\\(\"?(\\w*\\s?\\d*)*\"?\\);$")) {
+            resultado.add(String.format("<MethodDeclaration, 's'>", entrada));
+            metodo = true;
         }
 
         if (!classe) {

@@ -6,4 +6,6 @@ public class Principal {
         System.out.println("Olá, Mundo!");
         System.out.println(a);
     }
+
+    public int Teste();
 }
