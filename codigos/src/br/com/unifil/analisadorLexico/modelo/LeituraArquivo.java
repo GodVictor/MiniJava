@@ -12,7 +12,7 @@ public class LeituraArquivo {
         Scanner entrada;
         Scanner teclado = new Scanner(System.in);
         /*AnalisadorLexicoExemplo analisador = new AnalisadorLexicoExemplo();*/
-        AnalisadorLexico2 analisador = new AnalisadorLexico2();
+        AnalisadorLexico analisador = new AnalisadorLexico();
 
         try {
             System.out.println("Digite o caminho dos diretórios do arquivo .txt: ");

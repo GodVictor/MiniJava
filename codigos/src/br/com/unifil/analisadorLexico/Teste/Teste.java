@@ -1,13 +1,5 @@
 package br.com.unifil.analisadorLexico.Teste;
 
-import br.com.unifil.analisadorLexico.modelo.AnalisadorLexico2;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.List;
-import java.util.Scanner;
-
 public class Teste {
 
     /*public static void main(String[] args) {

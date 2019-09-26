@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AnalisadorLexico2 {
+public class AnalisadorLexico {
     private List<String> palavrasReservadas = Arrays.asList("public", "class", "int[]", "boolean", "int", "static",
             "void", "main", "System", "out", "println", "print", "format");
     private List<String> sinaisSimples = Arrays.asList("{", "}", "+", "-", "/", "*", "=", ";", "(", ")");
