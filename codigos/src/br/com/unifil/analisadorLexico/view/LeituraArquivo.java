@@ -1,4 +1,6 @@
-package br.com.unifil.analisadorLexico.modelo;
+package br.com.unifil.analisadorLexico.view;
+
+import br.com.unifil.analisadorLexico.controller.AnalisadorLexico;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

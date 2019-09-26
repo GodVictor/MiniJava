@@ -1,4 +1,4 @@
-package br.com.unifil.analisadorLexico.modelo;
+package br.com.unifil.analisadorLexico.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;

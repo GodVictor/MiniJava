@@ -1,5 +1,5 @@
 
-package br.com.unifil.analisadorLexico.modelo;
+package br.com.unifil.analisadorLexico.referencias;
 
 public class BnfChar {
     String s[] ;

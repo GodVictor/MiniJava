@@ -1,11 +1,8 @@
-
-package br.com.unifil.analisadorLexico.modelo;
-
-public class BnfFloat {
+package br.com.unifil.analisadorLexico.referencias;
+public class BnfInt {
     String s[] ;
-    String bnfFloat = "";
-    
-    public BnfFloat(String bnf){
+    String bnfInt = "";
+    public BnfInt(String bnf){
         s = bnf.split(";");
         bnf = "";
         for(int i = 0;i < s.length;i++ ){
@@ -13,26 +10,29 @@ public class BnfFloat {
         }
         s = bnf.split(" ");
     }
-    
+
     public String converter(){
         for(int i = 0;i < s.length;i++ ){
             if(s[i].equals("+") || s[i].equals("-") || s[i].equals("*") || s[i].equals("/") ){
-                bnfFloat += "<assignment operator> ";
+                bnfInt += "<assignment operator> ";
             }else if(s[i].equals("=")){
-                bnfFloat += "::= ";
+                bnfInt += "::= ";
             }else if(s[i].equals("public")  || s[i].equals("private")  || s[i].equals("default")  || s[i].equals("protected") ){
-                bnfFloat += "<method modifier> ";
-            }else if(s[i].equals("float")){
-                bnfFloat += "<floating-point type> ";
+                bnfInt += "<method modifier> ";
+            }else if(s[i].equals("int")){
+                bnfInt += "<integral type> ";
             }else if(s[i].matches("^[0-9]*$")){
-                bnfFloat += "<numeric> ";
-            }else if(s[i].matches("\\d+((\\.\\d+)?(f|F))?")){
-                bnfFloat += "<numericf> ";
+                bnfInt += "<numeric> ";
             }else{
-                bnfFloat += "<variable name> ";
+                bnfInt += "<variable name> ";
             }
         }
-        return bnfFloat;
+        return bnfInt;
     }
     
+    public void imprime(){
+        for(int i = 0;i < s.length;i++ ){
+            System.out.printf(s[i] + "\n");
+        }
+    }
 }
