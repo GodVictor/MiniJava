@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Teste {
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Caminho do diretório do arquivo: ");
         String caminho = teclado.nextLine();
@@ -31,6 +31,6 @@ public class Teste {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 }

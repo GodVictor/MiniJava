@@ -11,7 +11,8 @@ public class LeituraArquivo {
     public static void main(String[] args) {
         Scanner entrada;
         Scanner teclado = new Scanner(System.in);
-        AnalisadorLexicoExemplo analisador = new AnalisadorLexicoExemplo();
+        /*AnalisadorLexicoExemplo analisador = new AnalisadorLexicoExemplo();*/
+        AnalisadorLexico2 analisador = new AnalisadorLexico2();
 
         try {
             System.out.println("Digite o caminho dos diretórios do arquivo .txt: ");
@@ -22,25 +23,14 @@ public class LeituraArquivo {
 
             int linha = 1;
             while (entrada.hasNextLine()) {
-                List<String> strings = analisador.converterEmFluxoDeTokens(entrada.nextLine().trim(), linha);
-
-                if (strings.size() == 1) {
-                    System.out.print(linha + "- " + strings.get(0));
-                    System.out.println();
-                } else {
-                    System.out.print(linha + "- " + strings.get(0) + ", ");
+                List<String> strings = analisador.converterEmFluxoDeTokens(entrada.nextLine().trim());
+                System.out.print(linha + "- ");
+                for (int i = 0; i < strings.size(); i++) {
+                    System.out.print(strings.get(i));
                 }
-
-                for (int i = 1; i < strings.size(); i++) {
-                    if (i == strings.size()-1) {
-                        System.out.println(strings.get(i));
-                    } else {
-                        System.out.print(strings.get(i) + ", ");
-                    }
-                }
-
-                analisador.limparLista();
                 linha++;
+                System.out.println();
+                analisador.limparLista();
             }
 
 //            System.out.println(analisador.getResultado());

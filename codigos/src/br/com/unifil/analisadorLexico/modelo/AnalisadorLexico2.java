@@ -17,7 +17,10 @@ public class AnalisadorLexico2 {
     public List<String> converterEmFluxoDeTokens(String entrada) {
 //        System.out.format("%d- %s%n", linha, entrada);
 
-        String separador[] = entrada.split(" |\\.|\\(");
+        // String separador[] = entrada.split(" |\\.|\\(");
+
+        String separador[] = entrada.split(String.format(" |\\.|\\("));
+
         int tamanho;
 
 

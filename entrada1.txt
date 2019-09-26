@@ -3,7 +3,7 @@ public class Principal {
         int a = 0;
         int[] b;
         Aluno aluno;
-        System.out.println("Olá, Mundo!");
+        System.out.println(99);
         System.out.println(a);
     }
 
