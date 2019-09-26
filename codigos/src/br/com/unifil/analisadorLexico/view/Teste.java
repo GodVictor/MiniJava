@@ -1,4 +1,4 @@
-package br.com.unifil.analisadorLexico.Teste;
+package br.com.unifil.analisadorLexico.view;
 
 public class Teste {
 
