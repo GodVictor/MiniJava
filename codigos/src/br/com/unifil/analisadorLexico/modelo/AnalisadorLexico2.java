@@ -5,8 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AnalisadorLexico2 {
-    private List<String> palavrasReservadas = Arrays.asList("public", "class", "int[]", "boolean", "int");
-    private List<String> sinaisSimples = Arrays.asList("{", "}", "+", "-", "/", "*", "=", ";");
+    private List<String> palavrasReservadas = Arrays.asList("public", "class", "int[]", "boolean", "int", "static",
+            "void", "main", "System", "out", "println", "print", "format");
+    private List<String> sinaisSimples = Arrays.asList("{", "}", "+", "-", "/", "*", "=", ";", "(", ")");
     private List<String> sinaisCompostos = Arrays.asList("<=", ">=");
     private List<String> resultado = new ArrayList<>();
     private boolean token = false;
@@ -16,7 +17,7 @@ public class AnalisadorLexico2 {
     public List<String> converterEmFluxoDeTokens(String entrada) {
 //        System.out.format("%d- %s%n", linha, entrada);
 
-        String separador[] = entrada.split(" |\\.");
+        String separador[] = entrada.split(" |\\.|\\(");
         int tamanho;
 
 
@@ -41,15 +42,21 @@ public class AnalisadorLexico2 {
                 } else if (sinaisCompostos.contains(separador[i])) {
                     resultado.add(String.format("<SC, '%s'>", separador[i]));
                 } else {
-                    resultado.add(String.format("<ID, '%s'>", separador[i]));
+                    verificarIdentificador(separador, i, separador[i], "^[A-Z a-z]([A-Z]|[a-z]|[0-9])*$", "<ID, '%s'>");
                 }
                 if (temPontoVirgula) {
-                    resultado.add(String.format("<ID, '%s'>", ";"));
+                    resultado.add(String.format("<SS, '%s'>", ";"));
                 }
             }
         }
         temPontoVirgula = false;
         return resultado;
+    }
+
+    private void verificarIdentificador(String[] separador, int indice, String s, String regex, String lexema) {
+        if (s.matches(regex)) {
+            resultado.add(String.format(lexema, separador[indice]));
+        }
     }
 
     private void verificarPontoEVirgula(String[] separador, int i) {
