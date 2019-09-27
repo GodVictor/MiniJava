@@ -5,6 +5,7 @@ public class Principal {
         Aluno aluno;
         System.out.println(99);
         System.out.println(a);
+	System.out.print(Ikeda é puta);
     }
 
     public int Teste();
