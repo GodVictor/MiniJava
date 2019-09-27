@@ -17,8 +17,9 @@ public class LeituraArquivo {
         AnalisadorLexico analisador = new AnalisadorLexico();
 
         try {
-            System.out.println("Digite o caminho dos diretórios do arquivo .txt: ");
-            String arquivo = teclado.nextLine();
+            /*System.out.println("Digite o caminho dos diretórios do arquivo .txt: ");
+            String arquivo = teclado.nextLine();*/
+            String arquivo = "codigos/src/br/com/unifil/analisadorLexico/arquivosTeste/BubbleSort.txt";
             entrada = new Scanner(new BufferedReader(new FileReader(arquivo)));
 
             System.out.println();
@@ -26,13 +27,15 @@ public class LeituraArquivo {
             int linha = 1;
             while (entrada.hasNextLine()) {
                 List<String> strings = analisador.converterEmFluxoDeTokens(entrada.nextLine().trim());
-                System.out.print(linha + "- ");
-                for (int i = 0; i < strings.size(); i++) {
-                    System.out.print(strings.get(i));
+                if (!strings.isEmpty()) {
+                    System.out.print(linha + "- ");
+                    for (int i = 0; i < strings.size(); i++) {
+                        System.out.print(strings.get(i));
+                    }
+                    linha++;
+                    System.out.println();
+                    analisador.limparLista();
                 }
-                linha++;
-                System.out.println();
-                analisador.limparLista();
             }
 
 //            System.out.println(analisador.getResultado());

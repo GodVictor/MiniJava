@@ -11,7 +11,7 @@ public class AnalisadorLexico {
     private List<String> sinaisCompostos = Arrays.asList("<=", ">=");
     private List<String> resultado = new ArrayList<>();
     private boolean token = false;
-    private boolean temPontoVirgula = false;
+    private boolean temSimbolo = false;
 
 
     public List<String> converterEmFluxoDeTokens(String entrada) {
@@ -23,22 +23,30 @@ public class AnalisadorLexico {
 
         int tamanho;
 
+        if (separador[0].equals("//")) { return resultado; }
 
-        if (entrada.matches("System\\.out\\.println\\(([^;].*\\)*);")) {
+        /*if (entrada.matches("System\\.out\\.println\\(([^;].*\\)*);")) {
 //            System.out.println("FOI ENCONTRADO-----------------");
             resultado.add(String.format("<Statment, '%s'>", entrada.split(";")[0]));
-        }
+        }*/
 
         for (int i = 0; i < separador.length; i++) {
-            if (separador[i].contains(";")) {
-                separador[i] = separador[i].split(";")[0];
-                temPontoVirgula = true;
+            String simbolo = "";
+            for (int j = 0; j < sinaisSimples.size(); j++) {
+                simbolo = sinaisSimples.get(j);
+                if (simbolo.equals("{") || simbolo.equals("}") || simbolo.equals("(") || simbolo.equals(")")) {
+                    simbolo = String.format("\\\\\\%s", simbolo);
+                }
+                if (separador[i].contains(simbolo)) {
+                    separador[i] = separador[i].split(simbolo)[0];
+                    temSimbolo = true;
+                    break;
+                }
             }
-
             if (!separador[i].equals("")) {
                 if (palavrasReservadas.contains(separador[i])) {
                     resultado.add(String.format("<PR, '%s'>", separador[i]));
-                } else if (separador[i].matches("^([0-9]+)+$")) {
+                } else if (separador[i].matches("^(-?[0-9]+)+(\\.?[0-9]+)*$")) {
                     resultado.add(String.format("<LIT, '%s'>", separador[i]));
                 } else if (sinaisSimples.contains(separador[i])) {
                     resultado.add(String.format("<SS, '%s'>", separador[i]));
@@ -47,12 +55,16 @@ public class AnalisadorLexico {
                 } else {
                     verificarIdentificador(separador, i, separador[i], "^[A-Z a-z]([A-Z]|[a-z]|[0-9])*$", "<ID, '%s'>");
                 }
-                if (temPontoVirgula) {
-                    resultado.add(String.format("<SS, '%s'>", ";"));
+                if (temSimbolo) {
+                    /*if (simbolo.contains("{") | simbolo.contains("}")) {
+                        simbolo = simbolo.split("\\\\")[0];
+                    }*/
+                    System.out.println("Símbolo: " + simbolo);
+                    resultado.add(String.format("<SS, '%s'>", simbolo));
                 }
             }
         }
-        temPontoVirgula = false;
+        temSimbolo = false;
         return resultado;
     }
 

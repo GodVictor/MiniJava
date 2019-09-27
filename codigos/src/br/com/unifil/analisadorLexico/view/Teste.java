@@ -2,27 +2,37 @@ package br.com.unifil.analisadorLexico.view;
 
 public class Teste {
 
-    /*public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        System.out.println("Caminho do diretório do arquivo: ");
-        String caminho = teclado.nextLine();
-        int linha = 1;
-        try {
-            Scanner entrada = new Scanner(new BufferedReader(new FileReader(caminho)));
-            while (entrada.hasNextLine()) {
-                AnalisadorLexico2 analisadorLexico = new AnalisadorLexico2();
-                List<String> strings = analisadorLexico.converterEmFluxoDeTokens(entrada.nextLine().trim());
-                System.out.print(linha + "- ");
-                for (int i = 0; i < strings.size(); i++) {
-                    System.out.print(strings.get(i));
-                }
-                linha++;
-                System.out.println();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) {
+        /*String linha = "System.out.println(10);";
+        String[] split = linha.split(" |\\.|\\(");
 
-    }*/
+        for (int i = 0; i < split.length; i++) {
+            System.out.println(split[i]);
+        }*/
+        /*String teste = "\\\\sas";
+        String splits = "\\\\";
+        String[] split = teste.split(splits);
+        System.out.println(teste);
+        System.out.println(split[split.length-1]);*/
+        /*for (int i = 0; i < split.length; i++) {
+            System.out.println(i + "- " + split[i]);
+        }*/
+
+        String entrada = "public class Teste{";
+        String regexClasse = "^(public\\s)?(class)\\s(\\w+\\d*)+\\s*?\\{$";
+        if (entrada.matches(regexClasse)) {
+            String[] split1 = entrada.split(" | ");
+
+            for (int i = 0; i < split1.length; i++) {
+                if (split1[i].contains("{")) {
+                    split1[i] = split1[i].split("\\{")[0];
+                    System.out.println(split1[i]);
+                    System.out.println("{");
+                } else {
+                    System.out.println(split1[i]);
+                }
+            }
+        }
+    }
 
 }
