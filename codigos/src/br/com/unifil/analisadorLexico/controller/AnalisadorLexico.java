@@ -27,13 +27,8 @@ public class AnalisadorLexico {
 
         /*if (entrada.matches("System\\.out\\.println\\(([^;].*\\)*);")) {
 //            System.out.println("FOI ENCONTRADO-----------------");
-<<<<<<< HEAD
             resultado.add(String.format("<Statment, '%s'>", entrada.split(";")[0]));
         }*/
-=======
-            resultado.add(String.format("<ID, '%s'>", entrada.split(";")[0]));
-        }
->>>>>>> 3de7c9f396c63b7b2a1b6b80e778dc9cfd4685d5
 
         for (int i = 0; i < separador.length; i++) {
             String simbolo = "";
