@@ -6,9 +6,9 @@ import java.util.List;
 
 public class AnalisadorLexico {
     private List<String> palavrasReservadas = Arrays.asList("public", "class", "int[]", "boolean", "int", "static",
-            "void", "main", "System", "out", "println", "print", "format");
+            "void", "main", "print", "format");
     private List<String> sinaisSimples = Arrays.asList("{", "}", "+", "-", "/", "*", "=", ";", "(", ")");
-    private List<String> sinaisCompostos = Arrays.asList("<=", ">=");
+    private List<String> sinaisCompostos = Arrays.asList("<=", ">=", "&&");
     private List<String> resultado = new ArrayList<>();
     private boolean token = false;
     private boolean temPontoVirgula = false;
@@ -19,14 +19,14 @@ public class AnalisadorLexico {
 
         // String separador[] = entrada.split(" |\\.|\\(");
 
-        String separador[] = entrada.split(String.format(" |\\.|\\("));
+        String separador[] = entrada.split(String.format(" |\\("));
 
         int tamanho;
 
 
         if (entrada.matches("System\\.out\\.println\\(([^;].*\\)*);")) {
 //            System.out.println("FOI ENCONTRADO-----------------");
-            resultado.add(String.format("<Statment, '%s'>", entrada.split(";")[0]));
+            resultado.add(String.format("<ID, '%s'>", entrada.split(";")[0]));
         }
 
         for (int i = 0; i < separador.length; i++) {
